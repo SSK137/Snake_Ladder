@@ -43,13 +43,14 @@ public class Snake_Ladder_Problem {
                     }
                 }
             }
-            System.out.println("Player's Position :" + position + ",  #Current Position :" + currentPosition);
+            System.out.println("Player's Position :" + position + ",  Current Position :" + currentPosition);
+            System.out.println("Dice Count : " + dicecount);
         }
         return currentPosition;
     }
 
     public static void main (String[] args){
-        System.out.println("Welcome to Snake and Ladder Game");
+        System.out.println("Welcome to Snake and Ladder");
         playerChecksOption();
 
     }
