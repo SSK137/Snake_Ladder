@@ -2,29 +2,45 @@ import java.util.*;
 public class Snake_Ladder_Problem {
     public static final int START_POSITION = 0;
     public static final int NO_PLAY = 0;
+    public static final int END_POSITION = 100;
     public static final int Ladder = 1;
     public static final int Snake = 2;
-    public static void main(String[] args) {
-        System.out.println("Welcome To Snake And Ladder Game");
-        System.out.println("Roll The Dies");
-        Random random = new Random();
-        int position= 0;
-        int dies = random.nextInt(6) + 1;
-        System.out.println("Dies Value Is " + dies);
+    static int currentPosition;
+    static String position;
+    static Random random = new Random();
 
-        int options = random.nextInt(3);
-        System.out.println(options);
-        switch (options){
-            case Ladder :
-                position += dies;
+    public static int dieRoll() {
+        int diceValue = random.nextInt(6) + 1;
+        System.out.println("Dice value : " + diceValue);
+        return diceValue;
+    }
+    public static int playerChecksOption() {
+        int currentPosition = START_POSITION;
+        int checkOption = random.nextInt(3);
+        int dice = dieRoll();
+        switch (checkOption) {
+            case NO_PLAY:
+                currentPosition = currentPosition;
+                position = "Not played";
+                break;
+            case Ladder:
+                currentPosition += dice;
+                position = "Player is on Ladder";
                 break;
             case Snake:
-                if (position != 0)
-                    position -= dies;
-                break;
-            case NO_PLAY:
+                if (currentPosition <START_POSITION)
+                    currentPosition -= dice;
+                position = "Player is on Snake";
                 break;
         }
-        System.out.println("Player At Position " + position);
+        System.out.println("Player's Position :" + position + ",  #Current Position :" + currentPosition);
+        return currentPosition;
     }
+
+    public static void main(String[] args) {
+        System.out.println("Welcome to Snake and Ladder Game");
+        playerChecksOption();
+
+    }
+
 }
