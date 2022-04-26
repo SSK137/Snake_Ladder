@@ -14,30 +14,41 @@ public class Snake_Ladder_Problem {
         System.out.println("Dice value : " + diceValue);
         return diceValue;
     }
+
     public static int playerChecksOption() {
+        int dicecount = 0;
         int currentPosition = START_POSITION;
-        int checkOption = random.nextInt(3);
-        int dice = dieRoll();
-        switch (checkOption) {
-            case NO_PLAY:
-                currentPosition = currentPosition;
-                position = "Not played";
-                break;
-            case Ladder:
-                currentPosition += dice;
-                position = "Player is on Ladder";
-                break;
-            case Snake:
-                if (currentPosition <START_POSITION)
-                    currentPosition -= dice;
-                position = "Player is on Snake";
-                break;
+        while (currentPosition < END_POSITION) {
+            int checkOption = random.nextInt(3);
+            int dice = dieRoll();
+            dicecount ++;
+            switch (checkOption) {
+                case NO_PLAY -> {
+                    position = "Not played";
+                    currentPosition = currentPosition;
+                }
+                case Ladder -> {
+                    if (currentPosition + dice > END_POSITION) {
+                        currentPosition = currentPosition;
+                    } else {
+                        currentPosition += dice;
+                    }
+                }
+                case Snake -> {
+                    position = "Player is on Snake";
+                    if (currentPosition - dice <= START_POSITION) {
+                        currentPosition = START_POSITION;
+                    } else {
+                        currentPosition -= dice;
+                    }
+                }
+            }
+            System.out.println("Player's Position :" + position + ",  #Current Position :" + currentPosition);
         }
-        System.out.println("Player's Position :" + position + ",  #Current Position :" + currentPosition);
         return currentPosition;
     }
 
-    public static void main(String[] args) {
+    public static void main (String[] args){
         System.out.println("Welcome to Snake and Ladder Game");
         playerChecksOption();
 
